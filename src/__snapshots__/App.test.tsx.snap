@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App рендер Hello world 1`] = `
+<input
+  placeholder="input..."
+  type="text"
+/>
+`;
+
+exports[`рендер Hello world 1`] = `
+<input
+  placeholder="input..."
+  type="text"
+/>
+`;
