@@ -1,5 +1,6 @@
+/* eslint-disable testing-library/prefer-presence-queries */
 /* eslint-disable testing-library/no-debugging-utils */
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
 
@@ -26,6 +27,18 @@ describe("App", () => {
     screen.debug();
     const btn = await screen.findByText(/data/i);
     expect(btn).toBeInTheDocument();
+    screen.debug();
+  });
+
+  test("Click event", () => {
+    render(<App />);
+    const btn = screen.getByTestId("toggle-btn");
+    expect(btn).toBeInTheDocument();
+    expect(screen.queryByTestId("toggle-elem")).toBeNull();
+    fireEvent.click(btn);
+    expect(screen.queryByTestId("toggle-elem")).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(screen.queryByTestId("toggle-elem")).toBeNull();
     screen.debug();
   });
 });
