@@ -4,5 +4,6 @@ exports[`App рендер Hello world 1`] = `
 <input
   placeholder="input..."
   type="text"
+  value=""
 />
 `;

@@ -14,7 +14,6 @@ describe("App", () => {
     expect(helloWorld).toBeInTheDocument();
     expect(btn).toBeInTheDocument();
     expect(input).toMatchSnapshot();
-    screen.debug();
   });
   test("query input", () => {
     render(<App />);
@@ -27,7 +26,6 @@ describe("App", () => {
     screen.debug();
     const btn = await screen.findByText(/data/i);
     expect(btn).toBeInTheDocument();
-    screen.debug();
   });
 
   test("Click event", () => {
@@ -39,6 +37,13 @@ describe("App", () => {
     expect(screen.queryByTestId("toggle-elem")).toBeInTheDocument();
     fireEvent.click(btn);
     expect(screen.queryByTestId("toggle-elem")).toBeNull();
-    screen.debug();
+  });
+  test("Input event", () => {
+    render(<App />);
+    const input = screen.getByPlaceholderText(/input/i);
+    expect(input).toBeInTheDocument();
+    expect(screen.queryByTestId("value-elem")).toContainHTML("");
+    fireEvent.input(input, { target: { value: "Test" } });
+    expect(screen.queryByTestId("value-elem")).toContainHTML("Test");
   });
 });
