@@ -3,6 +3,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
+import userEvent from "@testing-library/user-event";
 
 describe("App", () => {
   test("рендер Hello world", () => {
@@ -43,7 +44,10 @@ describe("App", () => {
     const input = screen.getByPlaceholderText(/input/i);
     expect(input).toBeInTheDocument();
     expect(screen.queryByTestId("value-elem")).toContainHTML("");
-    fireEvent.input(input, { target: { value: "Test" } });
+    // Искуственное событие
+    // fireEvent.input(input, { target: { value: "Test" } });
+    // Близко к пользователю, обрабатываются события нажатия клавиш и тд
+    userEvent.type(input, "Test");
     expect(screen.queryByTestId("value-elem")).toContainHTML("Test");
   });
 });
